@@ -150,7 +150,7 @@ Model Monitoring (handleStartMonitoring, monitoringData state, useEffect for ale
        - avgLatencyMs: Average time taken to serve a prediction.
        - dataDriftScore: A measure of how much the incoming production data has diverged from the data the model was trained on.
        - modelDriftScore: A measure of how the model's performance (or its predictions' characteristics) has changed over time, indicating potential degradation.
-       - errorRate: Percentage of prediction requests that failed.
+       - errorRate: Percentage of prediction requests that failed.   
    - In a Real MLOps Pipeline with Vertex AI/Gemini:
        - Vertex AI Model Monitoring: This is a powerful managed service in Vertex AI that automatically detects data drift and model drift for deployed models. It can:
            - Analyze feature distributions of incoming data against training data.
@@ -197,22 +197,21 @@ The Automated Retraining Process:
 
    - Trigger: An alert (e.g., from Vertex AI Model Monitoring or Cloud Monitoring) or a scheduled event (e.g., weekly, monthly) initiates the retraining process. This trigger often comes via a Pub/Sub message or a Cloud Function.
    - Data Preparation: The pipeline first identifies and gathers the latest relevant data. This might involve:
-
       - Fetching new data from the ingestion pipeline.
       - Combining new data with existing historical data.
       - Applying the same Data Validation and Data Transformation steps that were used for the original training data, ensuring consistency. This is crucial for maintaining data quality and feature consistency.
 
-    - Model Training: A new model training job is automatically initiated using the freshly prepared data. This leverages the Vertex AI Training service, similar to the initial training phase. The training parameters might be fixed, or adaptively chosen based on the detected issue.
+   - Model Training: A new model training job is automatically initiated using the freshly prepared data. This leverages the Vertex AI Training service, similar to the initial training phase. The training parameters might be fixed, or adaptively chosen based on the detected issue.
 
-    - Model Evaluation: The newly trained model undergoes rigorous Model Evaluation against a held-out test set. This step is vital to ensure the new model performs better than the old one (or at least meets minimum performance criteria) before deployment.
+   - Model Evaluation: The newly trained model undergoes rigorous Model Evaluation against a held-out test set. This step is vital to ensure the new model performs better than the old one (or at least meets minimum performance criteria) before deployment.
 
-    - Model Versioning: If the new model passes evaluation, it is registered in the Vertex AI Model Registry as a new version, complete with its lineage, metrics, and the data version it was trained on.
+   - Model Versioning: If the new model passes evaluation, it is registered in the Vertex AI Model Registry as a new version, complete with its lineage, metrics, and the data version it was trained on.
 
-    - Automated Deployment (Conditional): Based on the evaluation results, the new model version can be automatically deployed to a Vertex AI Endpoint. This deployment might involve:
+   - Automated Deployment (Conditional): Based on the evaluation results, the new model version can be automatically deployed to a Vertex AI Endpoint. This deployment might involve:
 
-       - Canary Deployments: Routing a small percentage of live traffic to the new model first to observe its real-world performance before a full rollout.
-       - A/B Testing: Running the old and new models in parallel to compare their performance directly.
-       - Rollback: If the new model performs worse or causes issues in production, the system can automatically roll back to the previous stable version.
+   - Canary Deployments: Routing a small percentage of live traffic to the new model first to observe its real-world performance before a full rollout.
+   - A/B Testing: Running the old and new models in parallel to compare their performance directly.
+   - Rollback: If the new model performs worse or causes issues in production, the system can automatically roll back to the previous stable version.
 
 Benefits of Automated Retraining:
 
