@@ -80,11 +80,11 @@ Core GCP Services Used:
 1. Model Development:
 
 - TensorFlow (Python) for Core ML:
-    - Use your Python-configured Vertex AI Workbench notebooks.
-    - Develop and train TensorFlow/Keras models for Vision (e.g., CNNs for image classification, object detection) and NLP (e.g., Transformers for text classification, sequence tasks).
-    - Gemini Integration: Directly interact with the Gemini API (Python SDK) within your notebooks for:
-        - Few-shot prompting: Experiment with different prompts and examples to guide Gemini's behavior for various Vision/NLP tasks (e.g., image captioning, content summarization, question answering).
-        - Fine-tuning: For specific downstream tasks, you can fine-tune Gemini models (or use them as a base for custom models) on your custom datasets using Vertex AI Training.
+   - Use your Python-configured Vertex AI Workbench notebooks.
+   - Develop and train TensorFlow/Keras models for Vision (e.g., CNNs for image classification, object detection) and NLP (e.g., Transformers for text classification, sequence tasks).
+   - Gemini Integration: Directly interact with the Gemini API (Python SDK) within your notebooks for:
+       - Few-shot prompting: Experiment with different prompts and examples to guide Gemini's behavior for various Vision/NLP tasks (e.g., image captioning, content summarization, question answering).
+       - Fine-tuning: For specific downstream tasks, you can fine-tune Gemini models (or use them as a base for custom models) on your custom datasets using Vertex AI Training.
 - JavaScript (TensorFlow.js) for Web/Client-Side ML:
     - In your JavaScript-enabled Workbench or local environment, develop models with TensorFlow.js.
     - In-browser ML: Create models that run directly in the browser for client-side inference (e.g., real-time image processing from a webcam, text processing in a web app).
@@ -128,7 +128,6 @@ Typical Pipeline Steps:
   - Model Deployment (Conditional): Automatically deploying the model to an endpoint if evaluation metrics meet predefined thresholds (Python).
   - Model Monitoring Setup: Configuring model monitoring jobs (Python).
   - Web Asset Update: For TensorFlow.js models, a pipeline step could push the converted .js model artifacts to a Cloud Storage bucket or a web server (e.g., as part of a static web app deployment) (Python or JavaScript).
-
 - CI/CD Integration: Integrate Vertex AI Pipelines with your CI/CD system (e.g., Cloud Build, GitHub Actions). Trigger pipeline runs automatically on code pushes, data changes, or on a schedule.
 
 ## Phase 5: Model Management and Deployment
@@ -143,12 +142,12 @@ Typical Pipeline Steps:
 2. Endpoints and Batch Prediction:
 
 - Online Prediction (Vertex AI Endpoints):
-    - TensorFlow (Python): Deploy your registered TensorFlow SavedModels to Vertex AI Endpoints for real-time, low-latency online inference. Vertex AI provides pre-built TensorFlow serving containers, or you can use custom containers for more advanced serving logic. Configure auto-scaling and specify machine types (with GPUs for Vision/NLP if needed).
-    - JavaScript (TensorFlow.js - Node.js Server):
-        - For server-side TensorFlow.js inference, you can build a Node.js application that loads and serves your TensorFlow.js model. Package this Node.js app into a custom Docker container and deploy it to a Vertex AI Endpoint. This allows you to serve TensorFlow.js models via a web API.
-        - Client-side Deployment: For browser-based TensorFlow.js inference, the "deployment" involves hosting your web application (which includes the TensorFlow.js model) on a web server (e.g., Cloud Storage for static sites, Cloud Run for dynamic apps). The MLOps pipeline ensures the latest model artifacts are part of this deployment.
+   - TensorFlow (Python): Deploy your registered TensorFlow SavedModels to Vertex AI Endpoints for real-time, low-latency online inference. Vertex AI provides pre-built TensorFlow serving containers, or you can use custom containers for more advanced serving logic. Configure auto-scaling and specify machine types (with GPUs for Vision/NLP if needed).
+   - JavaScript (TensorFlow.js - Node.js Server):
+       - For server-side TensorFlow.js inference, you can build a Node.js application that loads and serves your TensorFlow.js model. Package this Node.js app into a custom Docker container and deploy it to a Vertex AI Endpoint. This allows you to serve TensorFlow.js models via a web API.
+       - Client-side Deployment: For browser-based TensorFlow.js inference, the "deployment" involves hosting your web application (which includes the TensorFlow.js model) on a web server (e.g., Cloud Storage for static sites, Cloud Run for dynamic apps). The MLOps pipeline ensures the latest model artifacts are part of this deployment.
  - Batch Prediction (Vertex AI Batch Prediction):
-    -  For large-scale, offline inference where latency isn't critical, use Vertex AI Batch Prediction. Specify input data location (Cloud Storage, BigQuery) and output location. This is typically for models served from Python/TensorFlow.
+    - For large-scale, offline inference where latency isn't critical, use Vertex AI Batch Prediction. Specify input data location (Cloud Storage, BigQuery) and output location. This is typically for models served from Python/TensorFlow.
 
 ## Phase 6: Model Monitoring and Retraining
 
