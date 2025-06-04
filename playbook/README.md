@@ -115,21 +115,21 @@ Core GCP Services Used:
 
 2. Automation (Vertex AI Pipelines):
 
-   - Define Pipelines: Use the Kubeflow Pipelines SDK or Vertex AI SDK for Python to define your MLOps workflow as a series of interconnected, containerized steps.
-   - Language-Agnostic Execution: Vertex AI Pipelines orchestrate containers, so individual steps can execute code written in Python or JavaScript (within a Node.js container).
-   
+- Define Pipelines: Use the Kubeflow Pipelines SDK or Vertex AI SDK for Python to define your MLOps workflow as a series of interconnected, containerized steps.
+- Language-Agnostic Execution: Vertex AI Pipelines orchestrate containers, so individual steps can execute code written in Python or JavaScript (within a Node.js container).
+
 Typical Pipeline Steps:
-     - Data Ingestion: Fetching raw data from Cloud Storage or BigQuery (Python).
-     - Data Preprocessing: Running Dataflow jobs (Python Beam SDK) or custom Python scripts to clean and transform data, potentially using Gemini for data augmentation.
-     - Feature Engineering: Generating and storing features in Vertex AI Feature Store (Python).
-     - Model Training: Executing Vertex AI Custom Training jobs (Python TensorFlow/Gemini fine-tuning).
-     - Model Evaluation: Running evaluation scripts on a hold-out test set, calculating metrics, and logging them to Vertex AI Experiments (Python).
-     - Model Registration: Registering the best-performing model to Vertex AI Model Registry (Python).
-     - Model Deployment (Conditional): Automatically deploying the model to an endpoint if evaluation metrics meet predefined thresholds (Python).
-     - Model Monitoring Setup: Configuring model monitoring jobs (Python).
-     - Web Asset Update: For TensorFlow.js models, a pipeline step could push the converted .js model artifacts to a Cloud Storage bucket or a web server (e.g., as part of a static web app deployment) (Python or JavaScript).
-   
-   - CI/CD Integration: Integrate Vertex AI Pipelines with your CI/CD system (e.g., Cloud Build, GitHub Actions). Trigger pipeline runs automatically on code pushes, data changes, or on a schedule.
+  - Data Ingestion: Fetching raw data from Cloud Storage or BigQuery (Python).
+  - Data Preprocessing: Running Dataflow jobs (Python Beam SDK) or custom Python scripts to clean and transform data, potentially using Gemini for data augmentation.
+  - Feature Engineering: Generating and storing features in Vertex AI Feature Store (Python).
+  - Model Training: Executing Vertex AI Custom Training jobs (Python TensorFlow/Gemini fine-tuning).
+  - Model Evaluation: Running evaluation scripts on a hold-out test set, calculating metrics, and logging them to Vertex AI Experiments (Python).
+  - Model Registration: Registering the best-performing model to Vertex AI Model Registry (Python).
+  - Model Deployment (Conditional): Automatically deploying the model to an endpoint if evaluation metrics meet predefined thresholds (Python).
+  - Model Monitoring Setup: Configuring model monitoring jobs (Python).
+  - Web Asset Update: For TensorFlow.js models, a pipeline step could push the converted .js model artifacts to a Cloud Storage bucket or a web server (e.g., as part of a static web app deployment) (Python or JavaScript).
+
+- CI/CD Integration: Integrate Vertex AI Pipelines with your CI/CD system (e.g., Cloud Build, GitHub Actions). Trigger pipeline runs automatically on code pushes, data changes, or on a schedule.
 
 ## Phase 5: Model Management and Deployment
 
