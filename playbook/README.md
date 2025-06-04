@@ -1,5 +1,6 @@
 # Playbook 
-GCP MLOps Playbook for Gemini Vision & NLP (TensorFlow/Python & JavaScript)
+
+## GCP MLOps Playbook for Gemini Vision & NLP (TensorFlow/Python & JavaScript)
 
 This playbook outlines an end-to-end MLOps strategy on Google Cloud Platform (GCP), using Vertex AI to build, deploy, and manage models powered by Gemini Vision and NLP capabilities. We'll primarily use TensorFlow with Python for model development and training, and JavaScript for client-side ML with TensorFlow.js or for interacting with web services.
 
@@ -30,16 +31,16 @@ Core GCP Services Used:
 
 2. Vertex AI Workbench Notebook Environments:
 
-   - Python (TensorFlow/Gemini SDK):
-       - This will be your primary environment. Create a user-managed notebook instance in Vertex AI Workbench.
-       - Choose a suitable machine type (consider GPUs for Vision/NLP tasks).
-       - Select a pre-built image like TensorFlow 2.x or PyTorch.
-       - Install the necessary SDKs: google-cloud-aiplatform and google-generativeai. You'll also likely need pandas, numpy, scikit-learn, and potentially image/text-specific libraries like Pillow, OpenCV, NLTK, spaCy, or transformers.
-       - Post-startup script: Consider using a post-startup script to automate the installation of these libraries or clone your MLOps repository.
-   - JavaScript (Node.js/TensorFlow.js):
-       - For developing TensorFlow.js models or Node.js applications that interact with your ML services, you can either:
-           - Use a Python-based Workbench instance and install Node.js alongside it.
-           - Create a custom container image (Docker) with Node.js, npm, and TensorFlow.js pre-installed, and use that image for a custom Workbench instance. This offers better isolation and reproducibility for JavaScript development.
+- Python (TensorFlow/Gemini SDK):
+    - This will be your primary environment. Create a user-managed notebook instance in Vertex AI Workbench.
+    - Choose a suitable machine type (consider GPUs for Vision/NLP tasks).
+    - Select a pre-built image like TensorFlow 2.x or PyTorch.
+    - Install the necessary SDKs: google-cloud-aiplatform and google-generativeai. You'll also likely need pandas, numpy, scikit-learn, and potentially image/text-specific libraries like Pillow, OpenCV, NLTK, spaCy, or transformers.
+    - Post-startup script: Consider using a post-startup script to automate the installation of these libraries or clone your MLOps repository.
+- JavaScript (Node.js/TensorFlow.js):
+    - For developing TensorFlow.js models or Node.js applications that interact with your ML services, you can either:
+        - Use a Python-based Workbench instance and install Node.js alongside it.
+        - Create a custom container image (Docker) with Node.js, npm, and TensorFlow.js pre-installed, and use that image for a custom Workbench instance. This offers better isolation and reproducibility for JavaScript development.
 
 3. Version Control:
 
@@ -49,24 +50,24 @@ Core GCP Services Used:
 
 1. Datasets (Vertex AI Datasets):
 
-   - Vision Data: Create a Vertex AI Image Dataset for image classification, object detection, or image captioning.
-       - Upload images to Cloud Storage.
-       - Import image metadata (e.g., labels, bounding box annotations) into Vertex AI Datasets, referencing the Cloud Storage URIs.
-   - NLP Data: Create a Vertex AI Text Dataset for text classification, sentiment analysis, or summarization.
-       - Upload text data (e.g., CSV, JSONL) to Cloud Storage.
-       - Import the data into Vertex AI Datasets.
-   - Data Versioning: Vertex AI Datasets provides some versioning. For more granular control, consider using DVC (Data Version Control) alongside Cloud Storage for large, evolving datasets.
+- Vision Data: Create a Vertex AI Image Dataset for image classification, object detection, or image captioning.
+    - Upload images to Cloud Storage.
+    - Import image metadata (e.g., labels, bounding box annotations) into Vertex AI Datasets, referencing the Cloud Storage URIs.
+- NLP Data: Create a Vertex AI Text Dataset for text classification, sentiment analysis, or summarization.
+    - Upload text data (e.g., CSV, JSONL) to Cloud Storage.
+    - Import the data into Vertex AI Datasets.
+- Data Versioning: Vertex AI Datasets provides some versioning. For more granular control, consider using DVC (Data Version Control) alongside Cloud Storage for large, evolving datasets.
 
 2. Data Processing with Gemini:
 
-   - Python for Preprocessing: Develop Vertex AI Workbench notebooks (Python) for data cleaning, transformation, and annotation. Use libraries like Pandas and NumPy.
-      - Gemini for Data Augmentation/Labeling:
-       - Vision: Use Gemini Vision's capabilities via the Python SDK to extract features from images, perform object recognition, or generate captions. This can assist with automated labeling or enriching existing datasets (e.g., using Gemini to describe images, then leveraging those descriptions as text features for other models).
-       - NLP: Use Gemini NLP via the Python SDK for tasks like text summarization, entity extraction, sentiment analysis, or generating synthetic text data for augmentation. This can help generate high-quality features or expand your training data.
-    - Large-Scale Data Processing (Dataflow/BigQuery):
-       - For massive datasets, leverage Dataflow (Apache Beam SDK for Python) to perform scalable data transformations and feature engineering.
-       - Integrate Dataflow pipelines with your Vertex AI workflow to prepare data for training.
-       - Store processed data in BigQuery or Cloud Storage for easy access.
+- Python for Preprocessing: Develop Vertex AI Workbench notebooks (Python) for data cleaning, transformation, and annotation. Use libraries like Pandas and NumPy.
+   - Gemini for Data Augmentation/Labeling:
+    - Vision: Use Gemini Vision's capabilities via the Python SDK to extract features from images, perform object recognition, or generate captions. This can assist with automated labeling or enriching existing datasets (e.g., using Gemini to describe images, then leveraging those descriptions as text features for other models).
+    - NLP: Use Gemini NLP via the Python SDK for tasks like text summarization, entity extraction, sentiment analysis, or generating synthetic text data for augmentation. This can help generate high-quality features or expand your training data.
+ - Large-Scale Data Processing (Dataflow/BigQuery):
+    - For massive datasets, leverage Dataflow (Apache Beam SDK for Python) to perform scalable data transformations and feature engineering.
+    - Integrate Dataflow pipelines with your Vertex AI workflow to prepare data for training.
+    - Store processed data in BigQuery or Cloud Storage for easy access.
 
 3. Feature Store (Vertex AI Feature Store):
 
@@ -78,17 +79,17 @@ Core GCP Services Used:
 
 1. Model Development:
 
-   - TensorFlow (Python) for Core ML:
-       - Use your Python-configured Vertex AI Workbench notebooks.
-       - Develop and train TensorFlow/Keras models for Vision (e.g., CNNs for image classification, object detection) and NLP (e.g., Transformers for text classification, sequence tasks).
-       - Gemini Integration: Directly interact with the Gemini API (Python SDK) within your notebooks for:
-           - Few-shot prompting: Experiment with different prompts and examples to guide Gemini's behavior for various Vision/NLP tasks (e.g., image captioning, content summarization, question answering).
-           - Fine-tuning: For specific downstream tasks, you can fine-tune Gemini models (or use them as a base for custom models) on your custom datasets using Vertex AI Training.
-   - JavaScript (TensorFlow.js) for Web/Client-Side ML:
-       - In your JavaScript-enabled Workbench or local environment, develop models with TensorFlow.js.
-       - In-browser ML: Create models that run directly in the browser for client-side inference (e.g., real-time image processing from a webcam, text processing in a web app).
-       - Node.js: Build server-side applications with Node.js that use TensorFlow.js for inference or lighter training tasks.
-       - Model Conversion: Use the tfjs_converter (Python tool) to convert your trained Python TensorFlow models into the TensorFlow.js format, enabling them to run in JavaScript environments.
+- TensorFlow (Python) for Core ML:
+    - Use your Python-configured Vertex AI Workbench notebooks.
+    - Develop and train TensorFlow/Keras models for Vision (e.g., CNNs for image classification, object detection) and NLP (e.g., Transformers for text classification, sequence tasks).
+    - Gemini Integration: Directly interact with the Gemini API (Python SDK) within your notebooks for:
+        - Few-shot prompting: Experiment with different prompts and examples to guide Gemini's behavior for various Vision/NLP tasks (e.g., image captioning, content summarization, question answering).
+        - Fine-tuning: For specific downstream tasks, you can fine-tune Gemini models (or use them as a base for custom models) on your custom datasets using Vertex AI Training.
+- JavaScript (TensorFlow.js) for Web/Client-Side ML:
+    - In your JavaScript-enabled Workbench or local environment, develop models with TensorFlow.js.
+    - In-browser ML: Create models that run directly in the browser for client-side inference (e.g., real-time image processing from a webcam, text processing in a web app).
+    - Node.js: Build server-side applications with Node.js that use TensorFlow.js for inference or lighter training tasks.
+    - Model Conversion: Use the tfjs_converter (Python tool) to convert your trained Python TensorFlow models into the TensorFlow.js format, enabling them to run in JavaScript environments.
 
 2. Experimentation (Vertex AI Experiments):
 
@@ -103,30 +104,30 @@ Core GCP Services Used:
 
 1. Training (Vertex AI Training):
 
-   - TensorFlow (Python) Custom Training Jobs:
-       - For fine-tuning Gemini models or training custom TensorFlow models, use Vertex AI Custom Training jobs.
-       - Package your Python training code into a Docker container. This ensures reproducibility and allows Vertex AI to run it on specified machine types (with GPUs, if needed).
-       - Pass hyperparameters as arguments to your training script.
-   - Hyperparameter Tuning: Use Vertex AI Hyperparameter Tuning to automatically search for optimal hyperparameters for your models.
-   - Distributed Training: Configure distributed training with Vertex AI for large models or datasets using TensorFlow's distributed strategies.
-   - JavaScript (TensorFlow.js Node.js):
-       - While less common for heavy lifting, you could containerize a Node.js application that trains a TensorFlow.js model and submit it as a custom training job on Vertex AI. This would primarily be for smaller, specialized models.
+- TensorFlow (Python) Custom Training Jobs:
+    - For fine-tuning Gemini models or training custom TensorFlow models, use Vertex AI Custom Training jobs.
+    - Package your Python training code into a Docker container. This ensures reproducibility and allows Vertex AI to run it on specified machine types (with GPUs, if needed).
+    - Pass hyperparameters as arguments to your training script.
+- Hyperparameter Tuning: Use Vertex AI Hyperparameter Tuning to automatically search for optimal hyperparameters for your models.
+- Distributed Training: Configure distributed training with Vertex AI for large models or datasets using TensorFlow's distributed strategies.
+- JavaScript (TensorFlow.js Node.js):
+    - While less common for heavy lifting, you could containerize a Node.js application that trains a TensorFlow.js model and submit it as a custom training job on Vertex AI. This would primarily be for smaller, specialized models.
 
 2. Automation (Vertex AI Pipelines):
 
    - Define Pipelines: Use the Kubeflow Pipelines SDK or Vertex AI SDK for Python to define your MLOps workflow as a series of interconnected, containerized steps.
    - Language-Agnostic Execution: Vertex AI Pipelines orchestrate containers, so individual steps can execute code written in Python or JavaScript (within a Node.js container).
    
-    Typical Pipeline Steps:
-        - Data Ingestion: Fetching raw data from Cloud Storage or BigQuery (Python).
-        - Data Preprocessing: Running Dataflow jobs (Python Beam SDK) or custom Python scripts to clean and transform data, potentially using Gemini for data augmentation.
-        - Feature Engineering: Generating and storing features in Vertex AI Feature Store (Python).
-        - Model Training: Executing Vertex AI Custom Training jobs (Python TensorFlow/Gemini fine-tuning).
-        - Model Evaluation: Running evaluation scripts on a hold-out test set, calculating metrics, and logging them to Vertex AI Experiments (Python).
-        - Model Registration: Registering the best-performing model to Vertex AI Model Registry (Python).
-        - Model Deployment (Conditional): Automatically deploying the model to an endpoint if evaluation metrics meet predefined thresholds (Python).
-        - Model Monitoring Setup: Configuring model monitoring jobs (Python).
-        - Web Asset Update: For TensorFlow.js models, a pipeline step could push the converted .js model artifacts to a Cloud Storage bucket or a web server (e.g., as part of a static web app deployment) (Python or JavaScript).
+Typical Pipeline Steps:
+     - Data Ingestion: Fetching raw data from Cloud Storage or BigQuery (Python).
+     - Data Preprocessing: Running Dataflow jobs (Python Beam SDK) or custom Python scripts to clean and transform data, potentially using Gemini for data augmentation.
+     - Feature Engineering: Generating and storing features in Vertex AI Feature Store (Python).
+     - Model Training: Executing Vertex AI Custom Training jobs (Python TensorFlow/Gemini fine-tuning).
+     - Model Evaluation: Running evaluation scripts on a hold-out test set, calculating metrics, and logging them to Vertex AI Experiments (Python).
+     - Model Registration: Registering the best-performing model to Vertex AI Model Registry (Python).
+     - Model Deployment (Conditional): Automatically deploying the model to an endpoint if evaluation metrics meet predefined thresholds (Python).
+     - Model Monitoring Setup: Configuring model monitoring jobs (Python).
+     - Web Asset Update: For TensorFlow.js models, a pipeline step could push the converted .js model artifacts to a Cloud Storage bucket or a web server (e.g., as part of a static web app deployment) (Python or JavaScript).
    
    - CI/CD Integration: Integrate Vertex AI Pipelines with your CI/CD system (e.g., Cloud Build, GitHub Actions). Trigger pipeline runs automatically on code pushes, data changes, or on a schedule.
 
@@ -141,13 +142,13 @@ Core GCP Services Used:
 
 2. Endpoints and Batch Prediction:
 
-   - Online Prediction (Vertex AI Endpoints):
-       - TensorFlow (Python): Deploy your registered TensorFlow SavedModels to Vertex AI Endpoints for real-time, low-latency online inference. Vertex AI provides pre-built TensorFlow serving containers, or you can use custom containers for more advanced serving logic. Configure auto-scaling and specify machine types (with GPUs for Vision/NLP if needed).
-       - JavaScript (TensorFlow.js - Node.js Server):
-           - For server-side TensorFlow.js inference, you can build a Node.js application that loads and serves your TensorFlow.js model. Package this Node.js app into a custom Docker container and deploy it to a Vertex AI Endpoint. This allows you to serve TensorFlow.js models via a web API.
-           - Client-side Deployment: For browser-based TensorFlow.js inference, the "deployment" involves hosting your web application (which includes the TensorFlow.js model) on a web server (e.g., Cloud Storage for static sites, Cloud Run for dynamic apps). The MLOps pipeline ensures the latest model artifacts are part of this deployment.
-    - Batch Prediction (Vertex AI Batch Prediction):
-       -  For large-scale, offline inference where latency isn't critical, use Vertex AI Batch Prediction. Specify input data location (Cloud Storage, BigQuery) and output location. This is typically for models served from Python/TensorFlow.
+- Online Prediction (Vertex AI Endpoints):
+    - TensorFlow (Python): Deploy your registered TensorFlow SavedModels to Vertex AI Endpoints for real-time, low-latency online inference. Vertex AI provides pre-built TensorFlow serving containers, or you can use custom containers for more advanced serving logic. Configure auto-scaling and specify machine types (with GPUs for Vision/NLP if needed).
+    - JavaScript (TensorFlow.js - Node.js Server):
+        - For server-side TensorFlow.js inference, you can build a Node.js application that loads and serves your TensorFlow.js model. Package this Node.js app into a custom Docker container and deploy it to a Vertex AI Endpoint. This allows you to serve TensorFlow.js models via a web API.
+        - Client-side Deployment: For browser-based TensorFlow.js inference, the "deployment" involves hosting your web application (which includes the TensorFlow.js model) on a web server (e.g., Cloud Storage for static sites, Cloud Run for dynamic apps). The MLOps pipeline ensures the latest model artifacts are part of this deployment.
+ - Batch Prediction (Vertex AI Batch Prediction):
+    -  For large-scale, offline inference where latency isn't critical, use Vertex AI Batch Prediction. Specify input data location (Cloud Storage, BigQuery) and output location. This is typically for models served from Python/TensorFlow.
 
 ## Phase 6: Model Monitoring and Retraining
 
@@ -170,12 +171,12 @@ Core GCP Services Used:
 
 1. Evaluating Models:
 
-   - Automated Evaluation: Integrate evaluation steps into your Vertex AI Pipelines to automatically assess model performance on test sets (primarily using Python scripts).
-   - Metrics: Beyond standard metrics, for Vision and NLP:
-       - Vision: Intersection over Union (IoU) for object detection, Structural Similarity Index (SSIM) or Peak Signal-to-Noise Ratio (PSNR) for image quality, Frechet Inception Distance (FID) or Inception Score for generative models.
-       - NLP: BLEU, ROUGE for text generation/summarization, Perplexity for language models, F1 for named entity recognition.
-       - Human-in-the-loop: For subjective tasks (e.g., content generation, image captioning), incorporate human evaluation in your workflow.
-       - Vertex AI Evaluation: Leverage Vertex AI Evaluation for comparing different models and understanding their performance characteristics.
+- Automated Evaluation: Integrate evaluation steps into your Vertex AI Pipelines to automatically assess model performance on test sets (primarily using Python scripts).
+- Metrics: Beyond standard metrics, for Vision and NLP:
+    - Vision: Intersection over Union (IoU) for object detection, Structural Similarity Index (SSIM) or Peak Signal-to-Noise Ratio (PSNR) for image quality, Frechet Inception Distance (FID) or Inception Score for generative models.
+    - NLP: BLEU, ROUGE for text generation/summarization, Perplexity for language models, F1 for named entity recognition.
+    - Human-in-the-loop: For subjective tasks (e.g., content generation, image captioning), incorporate human evaluation in your workflow.
+    - Vertex AI Evaluation: Leverage Vertex AI Evaluation for comparing different models and understanding their performance characteristics.
 
 2. Responsible AI Considerations:
 
@@ -217,5 +218,5 @@ This playbook provides a robust framework for managing your Gemini Vision and NL
 - training-automation.ipynb
 - workbench.ipynb
 
-
+## Comming Soon
 
