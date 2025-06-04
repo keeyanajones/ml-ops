@@ -123,16 +123,12 @@ This repository is organized into distinct directories to streamline MLOps pract
 |   |    ├── data-python.ipynb
 |   |    ├── data-scientest.ipynb
 |   |    ├── data-tensorflow.ipynb
-|   |    ├── data.ipynb
 |   |    ├── educator.ipynb
 |   |    ├── gemini-best-practices.ipynb
 |   |    ├── ml-engineer.ipynb
+|   |    ├── prompt-toolkit.ipynb
 |   |    ├── security-governance.ipynb
 |   |    ├── student.ipynb
-|   |    ├── team-collab-analytics.ipynb
-|   |    ├── team-collab-data.ipynb
-|   |    ├── team-collab-ml.ipynb
-|   |    ├── team-collab-research.ipynb
 |   |    ├── team-collab.ipynb
 |   |    ├── vertex-troubleshooting.ipynb
 |   |    |── README.md
