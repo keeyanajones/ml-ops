@@ -363,4 +363,5 @@ These templates provide a starting point for implementing robust MLOps practices
  - gcp_resource_setup.sh: A shell script to automate the creation of common GCP resources (e.g., GCS buckets, Vertex AI project settings) needed for a new project setup. This helps with the "Getting Started" experience.
  - model_card_template.md: A Markdown template for documenting your trained models, promoting transparency and responsible AI.
 
+## More Comming Soon 
 
