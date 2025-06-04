@@ -1,0 +1,140 @@
+# filename: pipeline.yaml
+# This is a conceptual Kubeflow Pipelines YAML for a Vertex AI Pipeline.
+# It demonstrates the structure and typical components of an MLOps workflow.
+
+# Define the pipeline
+apiVersion: kfp.kubernetes.io/v1
+kind: Pipeline
+metadata:
+  name: mlops-end-to-end-pipeline
+  annotations:
+    description: "An end-to-end MLOps pipeline for data processing, model training, evaluation, and conditional deployment on Vertex AI."
+spec:
+  # Define pipeline parameters (inputs to the entire pipeline)
+  parameters:
+    - name: project_id
+      type: String
+      description: "Google Cloud Project ID."
+    - name: region
+      type: String
+      description: "Google Cloud region for Vertex AI services."
+    - name: data_source_uri
+      type: String
+      description: "URI of the raw data source (e.g., gs://my-bucket/raw_data/)."
+    - name: training_data_version_tag
+      type: String
+      description: "Tag for the versioned training data (e.g., 'latest' or 'v1.2')."
+      default: "latest"
+    - name: model_display_name
+      type: String
+      description: "Display name for the trained model in Vertex AI Model Registry."
+    - name: model_threshold_accuracy
+      type: Float
+      description: "Minimum accuracy required for model deployment."
+      default: 0.85
+
+  # Define the pipeline tasks (components)
+  tasks:
+    # Task 1: Data Ingestion and Validation
+    - name: data-ingestion-validation
+      componentRef:
+        name: data-ingestion-validation-component # Reference to a pre-defined component
+      arguments:
+        - {name: project_id, value: {pipelineParam: project_id}}
+        - {name: region, value: {pipelineParam: region}}
+        - {name: data_source_uri, value: {pipelineParam: data_source_uri}}
+      outputs:
+        - {name: validated_data_uri, type: URI, description: "URI of the validated data."}
+        - {name: data_validation_status, type: String, description: "Status of data validation (e.g., 'PASS'/'FAIL')."}
+
+    # Task 2: Data Transformation and Feature Engineering
+    - name: data-transformation
+      componentRef:
+        name: data-transformation-component
+      arguments:
+        - {name: project_id, value: {pipelineParam: project_id}}
+        - {name: region, value: {pipelineParam: region}}
+        - {name: input_data_uri, value: {taskOutput: data-ingestion-validation.validated_data_uri}}
+      outputs:
+        - {name: transformed_data_uri, type: URI, description: "URI of the transformed data."}
+        - {name: training_data_version, type: String, description: "Version ID of the transformed training data."}
+
+    # Task 3: Model Training
+    - name: model-training
+      componentRef:
+        name: model-training-component
+      arguments:
+        - {name: project_id, value: {pipelineParam: project_id}}
+        - {name: region, value: {pipelineParam: region}}
+        - {name: training_data_uri, value: {taskOutput: data-transformation.transformed_data_uri}}
+        - {name: model_display_name, value: {pipelineParam: model_display_name}}
+        # Example: Pass hyperparameters
+        - {name: learning_rate, value: 0.01}
+        - {name: num_epochs, value: 10}
+      outputs:
+        - {name: model_artifact_uri, type: URI, description: "URI of the trained model artifact."}
+        - {name: model_resource_name, type: String, description: "Vertex AI Model resource name."}
+
+    # Task 4: Model Evaluation
+    - name: model-evaluation
+      componentRef:
+        name: model-evaluation-component
+      arguments:
+        - {name: project_id, value: {pipelineParam: project_id}}
+        - {name: region, value: {pipelineParam: region}}
+        - {name: model_resource_name, value: {taskOutput: model-training.model_resource_name}}
+        - {name: evaluation_data_uri, value: {taskOutput: data-transformation.transformed_data_uri}} # Using same transformed data for simplicity
+      outputs:
+        - {name: evaluation_metrics, type: Json, description: "JSON object of evaluation metrics."}
+        - {name: model_evaluation_status, type: String, description: "Status of model evaluation (e.g., 'PASS'/'FAIL')."}
+        - {name: model_accuracy, type: Float, description: "Extracted accuracy metric."}
+
+    # Task 5: Conditional Model Deployment
+    # This task will only run if model_accuracy meets the threshold
+    - name: conditional-model-deployment
+      componentRef:
+        name: model-deployment-component
+      arguments:
+        - {name: project_id, value: {pipelineParam: project_id}}
+        - {name: region, value: {pipelineParam: region}}
+        - {name: model_resource_name, value: {taskOutput: model-training.model_resource_name}}
+        - {name: model_display_name, value: {pipelineParam: model_display_name}}
+        - {name: traffic_split, value: 100} # Deploy 100% traffic to new model
+      when:
+        - {taskOutput: model-evaluation.model_accuracy, operator: '>=', value: {pipelineParam: model_threshold_accuracy}}
+      outputs:
+        - {name: endpoint_resource_name, type: String, description: "Vertex AI Endpoint resource name."}
+        - {name: deployed_model_id, type: String, description: "ID of the deployed model."}
+
+# Define the components used in the pipeline
+# In a real scenario, these would be separate component YAML files or Python functions
+# compiled into components.
+
+# Example of a placeholder component definition (for illustration)
+# data-ingestion-validation-component:
+#   name: Data Ingestion and Validation
+#   description: Ingests raw data and performs validation checks.
+#   inputs:
+#     - {name: project_id, type: String}
+#     - {name: region, type: String}
+#     - {name: data_source_uri, type: URI}
+#   outputs:
+#     - {name: validated_data_uri, type: URI}
+#     - {name: data_validation_status, type: String}
+#   implementation:
+#     container:
+#       image: gcr.io/my-project/data-ingestion-validation:latest
+#       command: ["python", "main.py"]
+#       args:
+#         - --project_id
+#         - {inputValue: project_id}
+#         - --region
+#         - {inputValue: region}
+#         - --data_source_uri
+#         - {inputValue: data_source_uri}
+#         - --output_uri
+#         - {outputPath: validated_data_uri}
+#         - --validation_status_path
+#         - {outputPath: data_validation_status}
+
+# ... similarly for other components (data-transformation-component, model-training-component, etc.)
