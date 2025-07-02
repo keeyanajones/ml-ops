@@ -1,5 +1,4 @@
 # GCP Vertex AI Gemini Vision Examples: MLOps Playbook & Templates
-
 This repository serves as a comprehensive resource for MLOps best practices, playbooks, and templates specifically designed for building, deploying, and managing Gemini Vision models on Google Cloud's Vertex AI.
 
 **Built for developers and ML engineers utilizing:**
@@ -12,7 +11,7 @@ This repository serves as a comprehensive resource for MLOps best practices, pla
 
 The goal is to provide a structured approach to building, deploying, and maintaining high-quality, scalable, and reliable computer vision solutions using the power of Gemini and Vertex AI.
 
----
+----
 
 ## Table of Contents
 
@@ -22,12 +21,14 @@ The goal is to provide a structured approach to building, deploying, and maintai
     * [3.1. Key Principles](#31-key-principles)
     * [3.2. MLOps Lifecycle for Vision Models](#32-mlops-lifecycle-for-vision-models)
 * [4. Repository Structure](#4-repository-structure)
+
 * [5. Getting Started on Vertex AI Workbench](#5-getting-started-on-vertex-ai-workbench)
     * [5.1. Prerequisites](#51-prerequisites)
     * [5.2. Setting Up Your Workbench Instance](#52-setting-up-your-workbench-instance)
     * [5.3. Cloning the Repository](#53-cloning-the-repository)
     * [5.4. Installation & Environment Setup](#54-installation--environment-setup)
     * [5.5. Running Quick Start Examples](#55-running-quick-start-examples)
+
 * [6. Playbooks & Guides](#6-playbooks--guides)
     * [6.1. Data Management for Vision Models](#61-data-management-for-vision-models)
     * [6.2. Model Development & Experimentation](#62-model-development--experimentation)
@@ -35,16 +36,18 @@ The goal is to provide a structured approach to building, deploying, and maintai
     * [6.4. Model Deployment & Serving Strategies](#64-model-deployment--serving-strategies)
     * [6.5. Monitoring Gemini Vision Models](#65-monitoring-gemini-vision-models)
     * [6.6. Model Retraining & Updates](#66-model-retraining--updates)
+
 * [7. Examples & Templates](#7-examples--templates)
     * [7.1. MLOps Automation Scripts (JavaScript)](#71-mlops-automation-scripts-javascript)
     * [7.2. Vertex AI Playbooks (Jupyter Notebooks)](#72-vertex-ai-playbooks-jupyter-notebooks)
     * [7.3. General Help & Guides (Jupyter Notebooks)](#73-general-help--guides-jupyter-notebooks)
     * [7.4. Reusable Templates](#74-reusable-templates)
+
 * [8. Contributing](#8-contributing)
 * [9. Support & Community](#9-support--community)
 * [10. License](#10-license)
 
----
+----
 
 ## 1. Introduction
 
@@ -54,7 +57,7 @@ This repository provides a curated collection of examples, practical guides, and
 
 Briefly explain what Gemini Vision is, its capabilities (e.g., multimodal understanding, advanced image analysis), and its relevance for computer vision tasks. Highlight its strengths (e.g., flexibility, pre-trained capabilities).
 
----
+----
 
 ## 3. MLOps Philosophy for Gemini Vision
 
@@ -101,7 +104,7 @@ We adhere to a standard MLOps lifecycle, with specific considerations for comput
     * Setting up alerts for performance degradation using scripts like `templates/setup_model_monitoring.py`.
     * Triggering automated or manual retraining processes based on monitoring insights.
 
----
+----
 
 ## 4. Repository Structure
 
@@ -118,10 +121,11 @@ This repository is organized into distinct directories to streamline MLOps pract
 |   |    |── README.md 
 |   ├── help
 |   |    ├── ai-researcher.ipynb
+|   |    ├── analysts-professional.ipynb
 |   |    ├── analytics-professional.ipynb
 |   |    ├── challenges.ipynb 
 |   |    ├── data-python.ipynb
-|   |    ├── data-scientest.ipynb
+|   |    ├── data-scientist.ipynb
 |   |    ├── data-tensorflow.ipynb
 |   |    ├── educator.ipynb
 |   |    ├── gemini-best-practices.ipynb
@@ -133,23 +137,65 @@ This repository is organized into distinct directories to streamline MLOps pract
 |   |    ├── vertex-troubleshooting.ipynb
 |   |    |── README.md
 │   ├── playbook
+|   |    ├── adversarial-testing.ipynb
+|   |    ├── anomaly-detection.ipynb
+|   |    ├── architectural-exploration.ipynb
+|   |    ├── custom-training-logic.ipynb
+|   |    ├── data-augmentation.ipynb
+|   |    ├── data-labeling.ipynb
 |   |    ├── data-processing.ipynb
-|   |    ├── datasets.ipynb
-|   |    ├── endpoints-batch-prediction.ipynb 
+|   |    ├── data-versioning.ipynb
+|   |    ├── dockerfile-creation.ipynb
+|   |    ├── endpoint-deployment.ipynb
+|   |    ├── endpoints-batch-prediction.ipynb
 |   |    ├── evaluating-models.ipynb
-|   |    ├── feature-store.ipynb
+|   |    ├── experiment-tracking.ipynb
+|   |    ├── feature-store.ipynb 
 |   |    ├── fine-tuning.ipynb
+|   |    ├── gemini-vision-integration.ipynb
+|   |    ├── hyperparameter-tuning.ipynb
+|   |    ├── inference-testing.ipynb
+|   |    ├── load-explore-datasets.ipynb
+|   |    ├── local-docker-testing.ipynb
 |   |    ├── model-dev-experimentation.ipynb
 |   |    ├── model-monitoring.ipynb
+|   |    ├── model-registration.ipynb
 |   |    ├── model-registry.ipynb
 |   |    ├── pipelines.ipynb
+|   |    ├── quantitative-analysis.ipynb
+|   |    ├── quantitative-evaluation.ipynb
+|   |    ├── react-frontend-development.ipynb
 |   |    ├── tensorboard.ipynb
 |   |    ├── training-automation.ipynb
 |   |    ├── workbench.ipynb
 |   |    |── README.md
 │   └── templates
+|   |    ├── automated_jobs.py
+|   |    ├── batch_prediction_using_bigquery.ipynb
+|   |    ├── batch_prediction_vertex_ai_sdk.ipynb
+|   |    ├── batch_prediction.py
+|   |    ├── custom_prediction_routine.py
+|   |    ├── custom_training_job.py
+|   |    ├── data-labeling_job.yaml
+|   |    ├── data-loading.py
+|   |    ├── endpoints.py
+|   |    ├── evaluation_metrics.py
+|   |    ├── game_server.py
+|   |    ├── gcp_resource_setup.sh
+|   |    ├── model_card_template.md
+|   |    ├── model_definition.py
+|   |    ├── monitor_batch_prediction_gemini_api.ipynb
 |   |    ├── pipeline.yaml
+|   |    ├── pipelines.py 
+|   |    ├── preprocessing.py
 |   |    ├── setup_model_monitoring.py
+|   |    ├── terraform.tfvars
+|   |    ├── training_custom_model.py
+|   |    ├── training.py
+|   |    ├── tuning.py
+|   |    ├── vertex_ai_dag.py
+|   |    ├── vertex_ai.tf
+|   |    ├── vertex_pipeline_component.py
 |   |    |── README.md
 |   |── README.md
 ```
@@ -223,7 +269,7 @@ To get a quick overview of how the components work:
 * **For MLOps Playbook walkthroughs:** Open `playbook/workbench.ipynb` to understand how to leverage Vertex AI Workbench, or `playbook/pipelines.ipynb` for a deep dive into MLOps pipelines.
 * **For general help & context:** Explore notebooks in the `help/` directory, such as `help/gemini-best-practices.ipynb`.
 
----
+----
 
 ## 6. Playbooks & Guides
 
@@ -267,7 +313,7 @@ These guides provide in-depth information and best practices for various aspects
 
 * Retraining strategies are often integrated within the [Pipelines Playbook (Python)](playbook/pipelines.ipynb) and triggered by insights from the [Model Monitoring Playbook (Python)](playbook/model-monitoring.ipynb).
 
----
+----
 
 ## 7. Examples & Templates
 
@@ -288,16 +334,35 @@ Located in the `ml-ops/examples/` directory, these **JavaScript** scripts provid
 
 The `ml-ops/playbook/` directory contains comprehensive Jupyter Notebooks that serve as practical guides and walkthroughs for various MLOps concepts and Vertex AI features:
 
-* **`data-processing.ipynb`**: Best practices for preparing your vision datasets.
+* **`adversarial-testing.ipynb`**: Adversarial testing applied across different domains.
+* **`anomaly-detection.ipynb`**: Understanding Anomaly detection.
+* **`architectural-exploration.ipynb`**: How Architectural Exploration is Conducted.
+* **`custom-training-logic.ipynb`**: What is Custom Training Logic?.
+* **`data-augmentation.ipynb`**: Common Data Augmentation Techniques (by Data Type).
+* **`data-labeling.ipynb`**: Types of Data Labels.
+* **`data-processing.ipynb`**: The Data Processing Cycle.
+* **`data-versioning.ipynb`**: How Data Versioning is implemented.
 * **`datasets.ipynb`**: Working with Vertex AI Datasets.
-* **`endpoints-batch-prediction.ipynb`**: Strategies for serving models.
-* **`evaluating-models.ipynb`**: Detailed model evaluation techniques.
+* **`dockerfile-creation.ipynb`**: Building and Running an image from a Dockerfile.
+* **`endpoint-deployment.ipynb`**: Endpoint Deployment for Applications/Services.
+* **`endpoints-batch-prediction.ipynb`**: Use Cases for Batch Prediction Endpoints.
+* **`evaluating-models.ipynb`**: Evaluation Metrics by Task Type.
+* **`experiment-tracking.ipynb`**: How to implement Experiment Tracking.
 * **`feature-store.ipynb`**: Understanding and using Vertex AI Feature Store.
 * **`fine-tuning.ipynb`**: Techniques for fine-tuning Gemini Vision models.
+* **`gemini-vision-integration.ipynb`**: How to Integrate Gemini Vision into Applications.
+* **`hyperparameter-tuning.ipynb`**: How is Hyperparameter Tuning is done.
+* **`inference-testing.ipynb`**: Key Aspects and Goals of Inferences Testing.
+* **`load-explore-datasets.ipynb`**: Loading and Exploring Datasets.
+* **`local-docker-testing.ipynb`**: How to perform Local Docker Testing.
 * **`model-dev-experimentation.ipynb`**: Managing ML experiments effectively.
 * **`model-monitoring.ipynb`**: Setting up and interpreting model monitoring.
+* **`model-registration.ipynb`**: Understanding Model Registration.
 * **`model-registry.ipynb`**: How to use the Vertex AI Model Registry.
 * **`pipelines.ipynb`**: Building and orchestrating automated ML pipelines.
+* **`quantitative-analysis.ipynb`**: Key Quantitative Analysis Methods and Techniques.
+* **`quantitative-evaluation.ipynb`**: Methods and Tools in Quantitative Evaluation.
+* **`react-frontend-development.ipynb`**: React with Google Clouds Vertex, Gemini, and Vision.
 * **`tensorboard.ipynb`**: Visualizing experiments with Vertex AI TensorBoard.
 * **`training-automation.ipynb`**: Automating model training workflows.
 * **`workbench.ipynb`**: Maximizing your productivity with Vertex AI Workbench.
@@ -307,9 +372,9 @@ The `ml-ops/playbook/` directory contains comprehensive Jupyter Notebooks that s
 
 The `ml-ops/help/` directory provides Jupyter Notebooks with broader guidance and contextual information for various roles and challenges:
 
-* **Persona-based Guides:** `ai-researcher.ipynb`, `analytics-professional.ipynb`, `data-scientest.ipynb`, `ml-engineer.ipynb`, `educator.ipynb`, `student.ipynb`.
-* **Team Collaboration Guides:** `team-collab.ipynb`, `team-collab-analytics.ipynb`, `team-collab-data.ipynb`, `team-collab-ml.ipynb`, `team-collab-research.ipynb`.
-* **Technical Deep Dives:** `data-python.ipynb`, `data-tensorflow.ipynb`, `data.ipynb`.
+* **Persona-based Guides:** `ai-researcher.ipynb`, `analysts-professional.ipynb`,`analytics-professional.ipynb`, `data-scientist.ipynb`, `ml-engineer.ipynb`, `educator.ipynb`, `student.ipynb`.
+* **Team Collaboration Guides:** `team-collab.ipynb`.
+* **Technical Deep Dives:** `data-python.ipynb`, `data-tensorflow.ipynb`, `prompt-toolkit.ipynb`.
 * **Specific Topics:** `challenges.ipynb`, `gemini-best-practices.ipynb`, `security-governance.ipynb`, `vertex-troubleshooting.ipynb`.
 * Refer to `ml-ops/help/README.md` for more details on these helpful resources.
 
@@ -317,24 +382,50 @@ The `ml-ops/help/` directory provides Jupyter Notebooks with broader guidance an
 
 The `ml-ops/templates/` directory contains reusable code and configuration templates to accelerate your development:
 
+* **`automated_jobs.py`**: .
+* **`batch_prediction_using_bigquery_input_vertex_ai_sdk.ipynb`**: .
+* **`batch_prediction_vertex_ai_sdk.ipynb`**: .
+* **`batch_prediction.ipynb`**: .
+* **`batch_prediction.py`**: .
+* **`custom_prediction_routine.py`**: .
+* **`custom_training_job.py`**: .
+* **`data_labeling_job.yaml`**: .
+* **`data_loading.py`**: .
+* **`endpoints.py`**: .
+* **`evaluation_metrics.py`**: .
+* **`game_server.py`**: .
+* **`gcp_resource_setup.sh`**: .
+* **`model_card_template.md`**: .
+* **`model_definition.py`**: .
+* **`monitor_batch_prediction_gemini_api.ipynb`**: .
 * **`pipeline.yaml`**: A foundational YAML template for defining Vertex AI Pipelines.
+* **`pipeline.py`**: .
+* **`preprocessing.py`**: .
 * **`setup_model_monitoring.py`**: A Python script template to quickly configure Vertex AI Model Monitoring.
+* **`terraform.tfvars`**: .
+* **`training_custom_model.py`**: .
+* **`training.py`**: .
+* **`tuning.py`**: .
+* **`vertex_ai_dag.py`**: .
+* **`vertex_ai.tf`**: .
+* **`vertex_pipeline_component.py`**: 
+
 * Refer to `ml-ops/templates/README.md` for more information on how to use these templates.
 
----
+----
 
 ## 8. Contributing
 
 We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) (create this file if it doesn't exist) for details on how to get started, report bugs, or suggest new features.
 
----
+----
 
 ## 9. Support & Community
 
 * If you have questions or encounter issues, please open an issue on this repository.
 * Join the [Google Cloud Community Forums](https://www.googlecloudcommunity.com/) for broader discussions on Vertex AI and MLOps.
 
----
+----
 
 ## 10. License
 
