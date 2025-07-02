@@ -1,5 +1,38 @@
 # Templates
 
+The `ml-ops/templates/` directory contains reusable code and configuration templates to accelerate your development:
+
+* **`automated_jobs.py`**: .
+* **`batch_prediction_using_bigquery_input_vertex_ai_sdk.ipynb`**: .
+* **`batch_prediction_vertex_ai_sdk.ipynb`**: .
+* **`batch_prediction.ipynb`**: .
+* **`batch_prediction.py`**: .
+* **`custom_prediction_routine.py`**: .
+* **`custom_training_job.py`**: .
+* **`data_labeling_job.yaml`**: .
+* **`data_loading.py`**: .
+* **`endpoints.py`**: .
+* **`evaluation_metrics.py`**: .
+* **`game_server.py`**: .
+* **`gcp_resource_setup.sh`**: .
+* **`model_card_template.md`**: .
+* **`model_definition.py`**: .
+* **`monitor_batch_prediction_gemini_api.ipynb`**: .
+* **`pipeline.yaml`**: A foundational YAML template for defining Vertex AI Pipelines.
+* **`pipeline.py`**: .
+* **`preprocessing.py`**: .
+* **`setup_model_monitoring.py`**: A Python script template to quickly configure Vertex AI Model Monitoring.
+* **`terraform.tfvars`**: .
+* **`training_custom_model.py`**: .
+* **`training.py`**: .
+* **`tuning.py`**: .
+* **`vertex_ai_dag.py`**: .
+* **`vertex_ai.tf`**: .
+* **`vertex_pipeline_component.py`**: 
+
+* Refer to `ml-ops/templates/README.md` for more information on how to use these templates.
+
+----
 
 ## 1. Vertex AI Pipeline (Kubeflow Pipelines YAML)
 
@@ -13,80 +46,81 @@ This cheat sheet provides practical examples and strategies for crafting effecti
 
 ### General Principles for MLOps Prompts:
 
-- Be Specific and Contextual: Provide all necessary details (e.g., data schema, error messages, target language, cloud service).
-- Define Roles/Persona: Tell Gemini what role to adopt (e.g., "Act as a Python expert," "You are an MLOps engineer").
-- Specify Output Format: Clearly state the desired output (e.g., "JSON," "Python code," "Markdown table," "YAML").
-- Provide Examples (Few-shot): If possible, give one or two examples of input/output to guide Gemini.
-- Iterate and Refine: Start broad, then narrow down the prompt based on initial responses.
-- Break Down Complex Tasks: For multi-step problems, break them into smaller, manageable prompts.
+- **Be Specific and Contextual:** Provide all necessary details (e.g., data schema, error messages, target language, cloud service).
+- **Define Roles/Persona:** Tell Gemini what role to adopt (e.g., "Act as a Python expert," "You are an MLOps engineer").
+- **Specify Output Format:** Clearly state the desired output (e.g., "JSON," "Python code," "Markdown table," "YAML").
+- **Provide Examples (Few-shot):** If possible, give one or two examples of input/output to guide Gemini.
+- **Iterate and Refine:** Start broad, then narrow down the prompt based on initial responses.
+- **Break Down Complex Tasks:** For multi-step problems, break them into smaller, manageable prompts.
 
-Prompt Categories & Examples:
+**Prompt Categories & Examples:**
 
-1. Data Analysis & Understanding
+**1. Data Analysis & Understanding**
 
-   - Task: Understand dataset characteristics, suggest cleaning steps.
+   - **Task:** Understand dataset characteristics, suggest cleaning steps.
 
-    Prompt Example:
+  **Prompt Example:**
 
     "I have a CSV dataset with columns: 'customer_id', 'age', 'income', 'num_purchases', 'last_purchase_date'.
     Describe potential data quality issues for each column (e.g., missing values, outliers, incorrect data types).
     Suggest Python (Pandas) code snippets to identify and address these issues.
     
-   - Output: Markdown table for issues, then Python code blocks."
+   - **Output:** Markdown table for issues, then Python code blocks."
 
-   - Task: Generate synthetic data for testing.
+   - **Task:** Generate synthetic data for testing.
 
-    Prompt Example:
+    **Prompt Example:**
 
     "Generate 10 rows of synthetic customer data in JSON format.
     Columns: 'customer_id' (unique int), 'name' (string), 'email' (valid email format), 'signup_date' (YYYY-MM-DD), 'is_premium' (boolean).
     Ensure 'signup_date' is within the last 6 months.
    
-   - Output: JSON array."
+   - **Output:** JSON array."
 
-2. Code Generation & Scripting
+**2. Code Generation & Scripting**
 
-   - Task: Generate a Vertex AI Pipeline component.
+   - **Task:** Generate a Vertex AI Pipeline component.
 
-   - Prompt Example:
+   - **Prompt Example:**
 
     "Write a Python function for a Kubeflow Pipelines component.
     This component should take a GCS URI of a CSV file, load it into a Pandas DataFrame, perform min-max scaling on 'age' and 'income' columns, and save the transformed DataFrame back to a new GCS URI as a Parquet file.
     Use `google-cloud-storage` and `pandas`.
     Include necessary imports and type hints.
     
-   - Output: Python code block."
+   - **Output:** Python code block."
 
-   - Task: Write a gcloud command for model deployment.
+   - **Task:** Write a gcloud command for model deployment.
 
-    Prompt Example:
+  **Prompt Example:**
 
     "Provide a `gcloud` CLI command to deploy a Vertex AI Model.
     The model ID is 'projects/my-project/locations/us-central1/models/12345'.
     Deploy it to a new endpoint named 'my-inference-endpoint'.
     Allocate 2 n1-standard-4 machine types.
     
-   - Output: Single `gcloud` command."
+   - **Output:** Single `gcloud` command."
 
-3. Troubleshooting & Debugging
+**3. Troubleshooting & Debugging**
 
-   - Task: Explain an error message.
+   - **Task:** Explain an error message.
 
-   - Prompt Example:
+   - **Prompt Example:**
 
     "I'm getting the following error in my Vertex AI Pipeline:
     `google.api_core.exceptions.InvalidArgument: 400 Request contains an invalid argument. The model_id 'my-model' does not exist.`
 
     What does this error mean, and what are the most likely causes and solutions?
    
-   - Output: Bullet points for causes and solutions."
+   - **Output:** Bullet points for causes and solutions."
 
-   - Task: Debug a Python script.
+   - **Task:** Debug a Python script.
 
-    Prompt Example:
+**Prompt Example:**
 
     "Analyze the following Python script for potential bugs related to file paths or data loading.
-    ```python
+    
+```python
     import pandas as pd
     import os
 
@@ -101,60 +135,61 @@ Prompt Categories & Examples:
     df = load_data(data_uri)
     if df is not None:
         print(df.head())
-    ```
+```
     Suggest improvements or common pitfalls for GCS paths.
    
-   - Output: Explanation and corrected code."
+   - **Output:** Explanation and corrected code."
 
-4. Documentation & Explanations
+4. **Documentation & Explanations**
 
-    - Task: Generate documentation for a pipeline component.
+    - **Task:** Generate documentation for a pipeline component.
 
-    Prompt Example:
+    **Prompt Example:**
 
-    "Write a docstring for a Python function that serves as a Kubeflow Pipelines component.
-    The function `train_model(project_id: str, data_uri: str, model_output_uri: str)` trains a simple scikit-learn Logistic Regression model using data from `data_uri` and saves the serialized model to `model_output_uri`.
+       "Write a docstring for a Python function that serves as a Kubeflow Pipelines component.
+       The function `train_model(project_id: str, data_uri: str, model_output_uri: str)` trains a simple scikit-learn Logistic Regression model using data from `data_uri` and saves the serialized model to `model_output_uri`.
     
-    - Output: Python docstring adhering to Google style."
+    - **Output:** Python docstring adhering to Google style."
 
-    - Task: Explain an MLOps concept.
+    - **Task:** Explain an MLOps concept.
 
-    Prompt Example:
+    **Prompt Example:**
 
-    "Explain the concept of 'Data Drift' in MLOps.
-    What are its causes, why is it important to monitor, and how can Vertex AI help detect it?
+       "Explain the concept of 'Data Drift' in MLOps.
+        What are its causes, why is it important to monitor, and how can Vertex AI help detect it?
     
-    - Output: Concise, clear explanation in Markdown."
+    - **Output:** Concise, clear explanation in Markdown."
 
-5. Infrastructure & Configuration
+5. **Infrastructure & Configuration**
 
-    - Task: Generate a Cloud Build configuration.
+    - **Task:** Generate a Cloud Build configuration.
 
-    - Prompt Example:
+    - **Prompt Example:**
 
-    "Create a `cloudbuild.yaml` file for a CI/CD pipeline for a Python ML project.
-    Steps should include:
-    1.  Build a Docker image for a training component.
-    2.  Push the image to Google Container Registry (GCR).
-    3.  Trigger a Vertex AI Pipeline job.
+          "Create a `cloudbuild.yaml` file for a CI/CD pipeline for a Python ML project.
+       
+          Steps should include:
+          1.  Build a Docker image for a training component.
+          2.  Push the image to Google Container Registry (GCR).
+          3.  Trigger a Vertex AI Pipeline job.
     
     Use placeholder values for project ID, image name, and pipeline name.
    
-    - Output: YAML code block."
+    - **Output:** YAML code block."
 
-    - Task: Define monitoring alerts.
+    - **Task:** Define monitoring alerts.
 
-    Prompt Example:
+    **Prompt Example:**
 
-    "Suggest a set of monitoring alerts for a deployed Vertex AI Model Endpoint.
-    Consider alerts for:
-    -   High prediction latency (> 500ms).
-    -   High error rate (> 1%).
-    -   Significant data drift (e.g., L-infinity distance > 0.1 for a specific feature).
+        "Suggest a set of monitoring alerts for a deployed Vertex AI Model Endpoint.
+        Consider alerts for:
+        -   High prediction latency (> 500ms).
+        -   High error rate (> 1%).
+        -   Significant data drift (e.g., L-infinity distance > 0.1 for a specific feature).
+      
+        For each, suggest the metric name and a threshold.
    
-    For each, suggest the metric name and a threshold.
-   
-   - Output: Markdown list."
+   - **Output:** Markdown list."
 
 By following these principles and adapting these examples, you can effectively leverage Gemini to accelerate various tasks within your MLOps workflows on Vertex AI. 
 
@@ -173,7 +208,7 @@ This template outlines a basic Continuous Integration/Continuous Delivery (CI/CD
 
 We'll provide conceptual YAML for both Google Cloud Build and GitHub Actions.
 
-1. Google Cloud Build Workflow (cloudbuild.yaml)
+1. **Google Cloud Build Workflow (cloudbuild.yaml)**
 
 Google Cloud Build is a serverless CI/CD platform that executes your builds on Google Cloud infrastructure. It's tightly integrated with other Google Cloud services.
 
@@ -264,7 +299,7 @@ options:
   machineType: E2_HIGHCPU_8 # Or other suitable machine type
 ```
 
-2. GitHub Actions Workflow (.github/workflows/main.yaml)
+2. **GitHub Actions Workflow (.github/workflows/main.yaml)**
 
 GitHub Actions allows you to automate workflows directly in your GitHub repository. This example uses Google Cloud's official GitHub Actions for authentication and interacting with Vertex AI.
 
@@ -356,12 +391,9 @@ jobs:
 These templates provide a starting point for implementing robust MLOps practices with Vertex AI and Gemini. Remember to replace all placeholder values (e.g., your-gcp-project-id, your-bucket, your-email@example.com, YOUR_ENDPOINT_ID, YOUR_TRAINING_TABLE, YOUR_PROJECT_NUMBER) with your actual Google Cloud project and resource details.
 
 ## New Templates
- - custom_training_job.py: A Python script serving as an entry point for a custom Vertex AI Training job. This is fundamental for training custom TensorFlow models.
- - custom_prediction_routine.py: A Python script for a custom prediction routine used with Vertex AI Endpoints. Essential for handling specific input/output formats, pre/post-processing for your anomaly detection model, or integrating with your React frontend.
- - data_labeling_job.yaml: A YAML configuration for defining a Vertex AI Data Labeling job. Crucial for vision tasks, especially if you need to label normal/anomaly images.
- - vertex_pipeline_component.py: A Python script demonstrating how to create a reusable Kubeflow Pipelines (KFP) component, which is the building block for Vertex AI Pipelines.
- - gcp_resource_setup.sh: A shell script to automate the creation of common GCP resources (e.g., GCS buckets, Vertex AI project settings) needed for a new project setup. This helps with the "Getting Started" experience.
- - model_card_template.md: A Markdown template for documenting your trained models, promoting transparency and responsible AI.
-
-## More Comming Soon 
-
+ - **custom_training_job.py:** A Python script serving as an entry point for a custom Vertex AI Training job. This is fundamental for training custom TensorFlow models.
+ - **custom_prediction_routine.py:** A Python script for a custom prediction routine used with Vertex AI Endpoints. Essential for handling specific input/output formats, pre/post-processing for your anomaly detection model, or integrating with your React frontend.
+ - **data_labeling_job.yaml:** A YAML configuration for defining a Vertex AI Data Labeling job. Crucial for vision tasks, especially if you need to label normal/anomaly images.
+ - **vertex_pipeline_component.py:** A Python script demonstrating how to create a reusable Kubeflow Pipelines (KFP) component, which is the building block for Vertex AI Pipelines.
+ - **gcp_resource_setup.sh:** A shell script to automate the creation of common GCP resources (e.g., GCS buckets, Vertex AI project settings) needed for a new project setup. This helps with the "Getting Started" experience.
+ - **model_card_template.md:** A Markdown template for documenting your trained models, promoting transparency and responsible AI.
