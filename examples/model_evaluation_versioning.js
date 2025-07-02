@@ -93,7 +93,6 @@ const App = () => {
     };
 
     // --- New Model Pipeline Functions ---
-
     /**
      * Simulates the model training process.
      * In a real MLOps pipeline, this would involve:
